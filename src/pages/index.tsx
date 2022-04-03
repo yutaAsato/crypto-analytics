@@ -27,10 +27,13 @@ export default function Home() {
       </div>
 
       <div className="w-full p-8 flex justify-between items-center max-w-2xl flex-col md:flex-row animate-fade-in">
-        <RankingList title={"Ranking By Volume"} data={binanceSortedByVolume} />
+        <RankingList
+          title={"Ranking By Volume 💰"}
+          data={binanceSortedByVolume}
+        />
         <div className="p-8 italic text-xl">{"VS"}</div>
         <RankingList
-          title={"Ranking By % Change"}
+          title={"Ranking By % Change 🚀"}
           data={binanceSortedByChange}
         />
         <div className="p-2" />
@@ -64,12 +67,14 @@ const RankingList: React.FC<{ title: string; data: BinanceData }> = (props) => {
                 </a>
               </Link>
               {coin.new24hVol && (
-                <div className="pl-2 italic ">
-                  {convertToInternationalCurrencySystem(coin.new24hVol)}
+                <div className="pl-2 italic text-green-200">
+                  {convertToInternationalCurrencySystem(
+                    coin.converted_volume.usd
+                  )}
                 </div>
               )}
               {coin.volume && !coin.new24hVol && (
-                <div className="pl-2 italic ">
+                <div className="pl-2 italic text-green-200">
                   {convertToInternationalCurrencySystem(
                     coin.converted_volume.usd
                   )}
