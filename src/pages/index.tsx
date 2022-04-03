@@ -26,6 +26,13 @@ export default function Home() {
         CRYPTO AVENGERS Ⓐ
       </div>
 
+      <Image
+        src="/avengers-assemble.gif"
+        alt="Picture of the author"
+        width={200}
+        height={200}
+      />
+
       <div className="w-full p-8 flex justify-between items-center max-w-2xl flex-col md:flex-row animate-fade-in">
         <RankingList
           title={"Ranking By Volume 💰"}
