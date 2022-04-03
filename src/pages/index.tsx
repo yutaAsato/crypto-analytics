@@ -58,7 +58,9 @@ const RankingList: React.FC<{ title: string; data: BinanceData }> = (props) => {
                 passHref={true}
               >
                 <a target="_blank" rel="noopener noreferrer">
-                  <div className="font-bold text-xl">{coin.base}</div>
+                  <div className="font-bold text-xl hover:text-red-200">
+                    {coin.base}
+                  </div>
                 </a>
               </Link>
               {coin.new24hVol && (
@@ -79,7 +81,7 @@ const RankingList: React.FC<{ title: string; data: BinanceData }> = (props) => {
   );
 };
 
-function convertToInternationalCurrencySystem(labelValue) {
+function convertToInternationalCurrencySystem(labelValue: any) {
   // Nine Zeroes for Billions
   return Math.abs(Number(labelValue)) >= 1.0e9
     ? (Math.abs(Number(labelValue)) / 1.0e9).toFixed(2) + "B 💵 "
