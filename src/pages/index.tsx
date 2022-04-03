@@ -20,13 +20,13 @@ export default function Home() {
   console.log("categoriesVolList", categoriesVolList);
 
   return (
-    <div className="h-screen w-screen flex flex-col justify-center items-center">
+    <div className="h-full w-screen flex flex-col justify-center items-center">
       <div className="p-2" />
       <div className="font-extrabold italic text-3xl text-red-200">
         CRYPTO AVENGERS Ⓐ
       </div>
 
-      <div className="p-8 flex justify-between items-center max-w-2xl flex-col md:flex-row animate-fade-in">
+      <div className="w-full p-8 flex justify-between items-center max-w-2xl flex-col md:flex-row animate-fade-in">
         <RankingList title={"Ranking By Volume"} data={binanceSortedByVolume} />
         <div className="p-8 italic text-xl">{"VS"}</div>
         <RankingList
@@ -48,7 +48,7 @@ const RankingList: React.FC<{ title: string; data: BinanceData }> = (props) => {
     <div className="flex flex-col items-center transition-opacity ">
       <div className="font-extrabold italic text-2xl">{title}</div>
       <div className="p-2" />
-      <div className="h-20">
+      <div className="h-full">
         {data?.map((coin: any, index: number) => {
           return (
             <div key={index} className="flex items-center p-1">
