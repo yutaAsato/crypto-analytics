@@ -70,7 +70,9 @@ const RankingList: React.FC<{ title: string; data: BinanceData }> = (props) => {
               )}
               {coin.volume && !coin.new24hVol && (
                 <div className="pl-2 italic ">
-                  {convertToInternationalCurrencySystem(coin.volume)}
+                  {convertToInternationalCurrencySystem(
+                    coin.converted_volume.usd
+                  )}
                 </div>
               )}
             </div>
