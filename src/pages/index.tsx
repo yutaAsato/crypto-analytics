@@ -26,7 +26,7 @@ export default function Home() {
         CRYPTO AVENGERS Ⓐ
       </div>
 
-      <div className="w-full p-8 flex justify-between items-center max-w-2xl flex-col md:flex-row animate-fade-in">
+      <div className="w-full p-8 flex justify-between items-center max-w-4xl flex-col md:flex-row animate-fade-in">
         <RankingList
           title={"Ranking By Volume 💰"}
           data={binanceSortedByVolume}
@@ -36,7 +36,6 @@ export default function Home() {
           title={"Ranking By % Change 🚀"}
           data={binanceSortedByChange}
         />
-        <div className="p-2" />
       </div>
     </div>
   );
@@ -48,7 +47,7 @@ const RankingList: React.FC<{ title: string; data: BinanceData }> = (props) => {
   const { title, data } = props;
 
   return (
-    <div className="flex flex-col items-center transition-opacity ">
+    <div className="flex flex-col items-center transition-opacity p-1 min-w-[300px]">
       <div className="font-extrabold italic text-2xl">{title}</div>
       <div className="p-2" />
       <div className="h-full">
