@@ -11,7 +11,7 @@ import type { AppRouter } from "@/backend/router";
 
 function getBaseUrl() {
   if (process.browser) return ""; // Browser should use current path
-  if (process.env.VERCEL_URL) return `https://${process.env.VERCEL_URL}`; // SSR should use vercel url
+  if (process.env.NETLIFY_URL) return `https://${process.env.NETLIFY_URL}`; // SSR should use netlify url
 
   return `http://localhost:${process.env.PORT ?? 3000}`; // dev SSR should use localhost
 }
