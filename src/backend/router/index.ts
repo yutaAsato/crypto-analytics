@@ -110,9 +110,9 @@ export const appRouter = trpc
         });
 
         //click on the button if there is
-        if (await isBanner) await page.click("#onetrust-accept-btn-handler");
+        // if (await isBanner) await page.click("#onetrust-accept-btn-handler");
 
-        // await page.click("#onetrust-accept-btn-handler");
+        await page.click("#onetrust-accept-btn-handler");
 
         // wait for first list element to show
         await page.waitForSelector(".css-f94ykk");
