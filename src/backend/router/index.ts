@@ -155,6 +155,8 @@ export const appRouter = trpc
         });
 
         console.log("======DATA========", data);
+        await page.waitForTimeout(5000); // wait for 5 seconds
+
         await browser.close();
         return data;
       } catch (error) {
