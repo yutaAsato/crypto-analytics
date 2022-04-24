@@ -93,7 +93,7 @@ export const appRouter = trpc
       try {
         const URL = "https://www.binance.com/en/support/announcement/c-48";
 
-        const browser = await puppeteer.launch();
+        const browser = await puppeteer.launch({ headless: true });
 
         // const browser = await puppeteer.launch({
         //   args: chrome.args,
