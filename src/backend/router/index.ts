@@ -3,6 +3,7 @@ import { z } from "zod";
 
 const CoinGecko = require("coingecko-api");
 const puppeteer = require("puppeteer");
+const chrome = require("chrome-aws-lambda");
 
 const HUNDRED_MILLION = 100000000;
 
@@ -91,7 +92,13 @@ export const appRouter = trpc
     async resolve({ input }) {
       try {
         const URL = "https://www.binance.com/en/support/announcement/c-48";
-        const browser = await puppeteer.launch();
+        // const browser = await puppeteer.launch();
+
+        const browser = await puppeteer.launch({
+          args: chrome.args,
+          executablePath: await chrome.executablePath,
+          headless: chrome.headless,
+        });
         const page = await browser.newPage();
 
         await page.goto(URL);
