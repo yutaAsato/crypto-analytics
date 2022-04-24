@@ -14,10 +14,16 @@ export default function Home() {
     "getCategories",
     { nullable: true },
   ]);
+  const binanceNewListing = trpc.useQuery([
+    "getBinanceNewListing",
+    { nullable: true },
+  ]);
 
-  console.log("binanceSortedByVolume", binanceSortedByVolume);
-  console.log("binanceSortedByChange", binanceSortedByChange);
-  console.log("categoriesVolList", categoriesVolList);
+  // console.log("binaceNewListing", binanceNewListing);
+
+  // console.log("binanceSortedByVolume", binanceSortedByVolume);
+  // console.log("binanceSortedByChange", binanceSortedByChange);
+  // console.log("categoriesVolList", categoriesVolList);
 
   return (
     <div className="h-full w-screen flex flex-col justify-center items-center">
@@ -37,12 +43,20 @@ export default function Home() {
           data={binanceSortedByChange}
         />
       </div>
+
+      <div className="w-full p-8 flex justify-center items-center max-w-4xl flex-col md:flex-row animate-fade-in">
+        <Listing
+          title={"Binance Latest Listings"}
+          data={binanceNewListing.data}
+        />
+      </div>
     </div>
   );
 }
 
 type BinanceData = inferQueryResponse<"getBinanceList">["volSorted"];
 
+//RankingList
 const RankingList: React.FC<{ title: string; data: BinanceData }> = (props) => {
   const { title, data } = props;
 
@@ -79,6 +93,36 @@ const RankingList: React.FC<{ title: string; data: BinanceData }> = (props) => {
                   )}
                 </div>
               )}
+            </div>
+          );
+        })}
+      </div>
+    </div>
+  );
+};
+
+//Listing
+const Listing: React.FC<{ title: string; data: any }> = (props) => {
+  const { title, data } = props;
+
+  return (
+    <div className="flex flex-col items-center transition-opacity p-1 min-w-[300px]">
+      <div className="font-extrabold italic text-2xl">🚨 {title}</div>
+      <div className="p-2" />
+      <div className="h-full">
+        {data?.map((list: any, index: number) => {
+          return (
+            <div key={index} className="flex items-center p-1">
+              <Link
+                href={`https://www.binance.com/en/support/announcement/c-48`}
+                passHref={true}
+              >
+                <a target="_blank" rel="noopener noreferrer">
+                  <div className="font-bold md:text-lg hover:text-red-200 text-center">
+                    ⚡ {list.content} ({list.contentDate})
+                  </div>
+                </a>
+              </Link>
             </div>
           );
         })}
