@@ -1,10 +1,12 @@
 import * as trpc from "@trpc/server";
 import { z } from "zod";
+const chromium = require("chrome-aws-lambda");
 
 const CoinGecko = require("coingecko-api");
-const puppeteer = require("puppeteer");
-// const chrome = require("chrome-aws-lambda");
-const playwright = require("playwright");
+// const puppeteer = require("puppeteer");
+const puppeteer = require("puppeteer-core");
+
+const chrome = require("chrome-aws-lambda");
 
 const HUNDRED_MILLION = 100000000;
 
@@ -93,20 +95,17 @@ export const appRouter = trpc
     async resolve({ input }) {
       try {
         const URL = "https://www.binance.com/en/support/announcement/c-48";
-        //----------------------------------------------------------------------------------------------------------------------
-        const browser = await playwright.chromium.launch({
-          headless: true, // setting this to true will not run the UI
-        });
+        // const browser = await puppeteer.launch();
 
-        // const browser = await puppeteer.launch({ headless: true });
-
-        // const browser = await puppeteer.launch({
-        //   args: chrome.args,
-        //   executablePath: await chrome.executablePath,
-        //   headless: chrome.headless,
-        // });
-
-        //----------------------------------------------------------------------------------------------------------------------
+        const browser = await puppeteer.launch(
+          process.env.NODE_ENV === "production"
+            ? {
+                args: chrome.args,
+                executablePath: await chrome.executablePath,
+                headless: chrome.headless,
+              }
+            : {}
+        );
         const page = await browser.newPage();
 
         await page.goto(URL);
@@ -155,8 +154,6 @@ export const appRouter = trpc
         });
 
         console.log("======DATA========", data);
-        await page.waitForTimeout(5000); // wait for 5 seconds
-
         await browser.close();
         return data;
       } catch (error) {

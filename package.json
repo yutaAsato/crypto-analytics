@@ -19,6 +19,7 @@
     "next": "12.1.4",
     "playwright": "^1.21.1",
     "puppeteer": "^13.6.0",
+    "puppeteer-core": "^13.6.0",
     "react": "18.0.0",
     "react-dom": "18.0.0",
     "react-query": "^3.34.19",
