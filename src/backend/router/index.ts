@@ -2,6 +2,7 @@ import * as trpc from "@trpc/server";
 import { z } from "zod";
 
 const CoinGecko = require("coingecko-api");
+const puppeteer = require("puppeteer");
 
 const HUNDRED_MILLION = 100000000;
 
@@ -81,6 +82,67 @@ export const appRouter = trpc
         return b.volume_24h - a.volume_24h;
       });
       return sortedByVol;
+    },
+  })
+  .query("getBinanceNewListing", {
+    input: z.object({
+      nullable: z.boolean(),
+    }),
+    async resolve({ input }) {
+      try {
+        const URL = "https://www.binance.com/en/support/announcement/c-48";
+        const browser = await puppeteer.launch();
+        const page = await browser.newPage();
+
+        await page.goto(URL);
+
+        // check if the annoying banner at bottom is there
+        const isBanner = await page.evaluate(() => {
+          return !!document.querySelector("#onetrust-accept-btn-handler"); // !! converts anything to boolean
+        });
+
+        //click on the button if there is
+        if (await isBanner) await page.click("#onetrust-accept-btn-handler");
+
+        // wait for first list element to show
+        await page.waitForSelector(".css-f94ykk");
+
+        let data = await page.evaluate(() => {
+          let results: any = [];
+          const data = document.querySelectorAll(".css-f94ykk");
+
+          data.forEach((item) => {
+            results.push({
+              content: item.textContent,
+            });
+          });
+
+          const filteredData = results
+            .filter((item: any) => {
+              return item.content.split("").includes("("); //filter only "List' notifications"
+            })
+            .map((item: any) => {
+              // remove date at the end
+              return {
+                content: item.content
+                  .split("")
+                  .slice(0, item.content.indexOf("2"))
+                  .join(""),
+                contentDate: item.content
+                  .split("")
+                  .slice(item.content.indexOf("2"))
+                  .join(""),
+              };
+            });
+          return filteredData;
+        });
+
+        console.log("======DATA========", data);
+        await browser.close();
+        return data;
+      } catch (error) {
+        console.error(error);
+      }
     },
   });
 
