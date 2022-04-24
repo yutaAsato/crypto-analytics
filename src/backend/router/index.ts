@@ -92,13 +92,14 @@ export const appRouter = trpc
     async resolve({ input }) {
       try {
         const URL = "https://www.binance.com/en/support/announcement/c-48";
-        // const browser = await puppeteer.launch();
 
-        const browser = await puppeteer.launch({
-          args: chrome.args,
-          executablePath: await chrome.executablePath,
-          headless: chrome.headless,
-        });
+        const browser = await puppeteer.launch();
+
+        // const browser = await puppeteer.launch({
+        //   args: chrome.args,
+        //   executablePath: await chrome.executablePath,
+        //   headless: chrome.headless,
+        // });
         const page = await browser.newPage();
 
         await page.goto(URL);
@@ -109,9 +110,9 @@ export const appRouter = trpc
         });
 
         //click on the button if there is
-        // if (await isBanner) await page.click("#onetrust-accept-btn-handler");
+        if (await isBanner) await page.click("#onetrust-accept-btn-handler");
 
-        await page.click("#onetrust-accept-btn-handler");
+        // await page.click("#onetrust-accept-btn-handler");
 
         // wait for first list element to show
         await page.waitForSelector(".css-f94ykk");
