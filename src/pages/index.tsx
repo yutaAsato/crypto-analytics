@@ -18,6 +18,7 @@ export default function Home() {
     "getBinanceNewListing",
     { nullable: true },
   ]);
+  console.log("alpha branch gitlab");
 
   console.log("binaceNewListing", binanceNewListing);
 
