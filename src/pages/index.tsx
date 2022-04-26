@@ -19,6 +19,8 @@ export default function Home() {
     { nullable: true },
   ]);
 
+  console.log("feat/test");
+
   console.log("binaceNewListing", binanceNewListing);
 
   // console.log("binanceSortedByVolume", binanceSortedByVolume);
