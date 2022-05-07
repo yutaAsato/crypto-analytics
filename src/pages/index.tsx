@@ -19,7 +19,7 @@ export default function Home() {
     { nullable: true },
   ]);
 
-  // console.log("binaceNewListing", binanceNewListing);
+  console.log("binaceNewListing", binanceNewListing);
 
   // console.log("binanceSortedByVolume", binanceSortedByVolume);
   // console.log("binanceSortedByChange", binanceSortedByChange);
