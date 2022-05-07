@@ -3,8 +3,8 @@ import { z } from "zod";
 const chromium = require("chrome-aws-lambda");
 
 const CoinGecko = require("coingecko-api");
-// const puppeteer = require("puppeteer");
-const puppeteer = require("puppeteer-core");
+const puppeteer = require("puppeteer");
+// const puppeteer = require("puppeteer-core");
 
 const chrome = require("chrome-aws-lambda");
 
