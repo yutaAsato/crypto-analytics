@@ -13,7 +13,7 @@
     "@trpc/next": "^9.21.0",
     "@trpc/react": "^9.21.0",
     "@trpc/server": "^9.21.0",
-    "chrome-aws-lambda": "^10.1.0",
+    "chrome-aws-lambda": "1.6.3",
     "coingecko-api": "^1.0.10",
     "init": "^0.1.2",
     "next": "12.1.4",
