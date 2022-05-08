@@ -95,17 +95,17 @@ export const appRouter = trpc
     async resolve({ input }) {
       try {
         const URL = "https://www.binance.com/en/support/announcement/c-48";
-        // const browser = await puppeteer.launch();
+        const browser = await puppeteer.launch();
 
-        const browser = await puppeteer.launch(
-          process.env.NODE_ENV === "production"
-            ? {
-                args: chrome.args,
-                executablePath: await chrome.executablePath,
-                headless: chrome.headless,
-              }
-            : {}
-        );
+        // const browser = await puppeteer.launch(
+        //   process.env.NODE_ENV === "production"
+        //     ? {
+        //         args: chrome.args,
+        //         executablePath: await chrome.executablePath,
+        //         headless: chrome.headless,
+        //       }
+        //     : {}
+        // );
         const page = await browser.newPage();
 
         await page.goto(URL);
